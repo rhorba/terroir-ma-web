@@ -13,6 +13,19 @@
     "unauthorized_desc": "Vous n'avez pas les droits nécessaires pour accéder à cette page.",
     "backHome": "Retour à l'accueil"
   },
+  "cooperativeAdmin": {
+    "dashboard": "Tableau de bord",
+    "members": "Membres",
+    "farms": "Fermes",
+    "products": "Produits",
+    "batches": "Lots de production",
+    "addMember": "Ajouter un membre",
+    "mapFarm": "Enregistrer une ferme",
+    "noMembers": "Aucun membre enregistré.",
+    "noFarms": "Aucune ferme enregistrée.",
+    "noProducts": "Aucun produit enregistré pour cette coopérative.",
+    "noBatches": "Aucun lot de production enregistré."
+  },
   "superAdmin": {
     "cooperatives": "Coopératives",
     "labs": "Laboratoires",

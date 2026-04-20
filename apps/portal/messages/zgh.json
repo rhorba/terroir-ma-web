@@ -13,6 +13,19 @@
     "unauthorized_desc": "ⵓⵔ ⴷⴰⵔⴽ ⵜⵉⴽⵉⵍⵢⵉⵏ ⵏ ⵓⴽⵛⵎ ⵙ ⵓⵙⵙⴰⵖ ⴰ.",
     "backHome": "ⵓⵖⴰⵍ ⵖⵔ ⵜⵣⵡⴰⵔⵜ"
   },
+  "cooperativeAdmin": {
+    "dashboard": "ⴰⵙⵙⴰⵖ ⴰⵎⵇⵇⵔⴰⵏ",
+    "members": "ⵉⵎⴷⴷⵓⴽⴽⴰⵍ",
+    "farms": "ⵉⵎⵣⴰⴳⵏ",
+    "products": "ⵉⵎⵏⵣⴰⵡⵏ",
+    "batches": "ⵜⵉⴽⴽⴰⵍ ⵏ ⵓⵙⴽⴽⵉⵏ",
+    "addMember": "ⵔⵏⵓ ⴰⵎⴷⴷⵓⴽⴽⴰⵍ",
+    "mapFarm": "ⵙⵏⵜⵍ ⴰⵎⵣⴰⴳ",
+    "noMembers": "ⵓⵔ ⵍⵍⵉⵏ ⵉⵎⴷⴷⵓⴽⴽⴰⵍ.",
+    "noFarms": "ⵓⵔ ⵍⵍⵉⵏ ⵉⵎⵣⴰⴳⵏ.",
+    "noProducts": "ⵓⵔ ⵍⵍⵉⵏ ⵉⵎⵏⵣⴰⵡⵏ ⵉ ⵜⵡⵉⵙⵉ ⴰ.",
+    "noBatches": "ⵓⵔ ⵍⵍⵉⵏ ⵜⵉⴽⴽⴰⵍ ⵏ ⵓⵙⴽⴽⵉⵏ."
+  },
   "superAdmin": {
     "cooperatives": "ⵜⵉⵡⵉⵙⵉ",
     "labs": "ⵉⵎⵥⵍⴰ",

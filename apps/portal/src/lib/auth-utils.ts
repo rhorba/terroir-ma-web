@@ -12,3 +12,9 @@ export async function getRoles(): Promise<string[]> {
   const session = await auth();
   return (session?.user as { roles?: string[] })?.roles ?? [];
 }
+
+/** Returns the cooperative ID for the logged-in cooperative-admin (from Keycloak JWT claim). */
+export async function getCooperativeId(): Promise<string | null> {
+  const session = await auth();
+  return (session?.user as { cooperativeId?: string | null })?.cooperativeId ?? null;
+}

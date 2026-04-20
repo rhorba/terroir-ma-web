@@ -3,13 +3,11 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 const NAV = [
-  { href: '/fr/cooperative-admin/cooperative', label: 'Profil Coopérative' },
+  { href: '/fr/cooperative-admin', label: 'Tableau de bord' },
   { href: '/fr/cooperative-admin/members', label: 'Membres' },
   { href: '/fr/cooperative-admin/farms', label: 'Fermes' },
-  { href: '/fr/cooperative-admin/harvests', label: 'Récoltes' },
-  { href: '/fr/cooperative-admin/batches', label: 'Lots' },
-  { href: '/fr/cooperative-admin/certifications', label: 'Certifications' },
-  { href: '/fr/cooperative-admin/documents', label: 'Documents' },
+  { href: '/fr/cooperative-admin/products', label: 'Produits' },
+  { href: '/fr/cooperative-admin/batches', label: 'Lots de production' },
 ];
 
 export default async function CooperativeAdminLayout({
