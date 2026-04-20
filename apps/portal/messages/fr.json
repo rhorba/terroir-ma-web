@@ -12,5 +12,22 @@
     "unauthorized": "Accès non autorisé",
     "unauthorized_desc": "Vous n'avez pas les droits nécessaires pour accéder à cette page.",
     "backHome": "Retour à l'accueil"
+  },
+  "superAdmin": {
+    "cooperatives": "Coopératives",
+    "labs": "Laboratoires",
+    "specifications": "Spécifications SDOQ",
+    "settings": "Paramètres",
+    "auditLog": "Journal d'audit",
+    "verify": "Vérifier",
+    "reject": "Rejeter",
+    "accredit": "Accréditer",
+    "revoke": "Révoquer",
+    "status": {
+      "pending": "En attente",
+      "active": "Active",
+      "suspended": "Suspendue",
+      "accredited": "Accréditée"
+    }
   }
 }

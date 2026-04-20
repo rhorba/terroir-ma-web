@@ -12,5 +12,22 @@
     "unauthorized": "ⵓⵔ ⵜⵜⵓⵙⵔⴰ",
     "unauthorized_desc": "ⵓⵔ ⴷⴰⵔⴽ ⵜⵉⴽⵉⵍⵢⵉⵏ ⵏ ⵓⴽⵛⵎ ⵙ ⵓⵙⵙⴰⵖ ⴰ.",
     "backHome": "ⵓⵖⴰⵍ ⵖⵔ ⵜⵣⵡⴰⵔⵜ"
+  },
+  "superAdmin": {
+    "cooperatives": "ⵜⵉⵡⵉⵙⵉ",
+    "labs": "ⵉⵎⵥⵍⴰ",
+    "specifications": "ⵉⵙⵏⵜⴰⵍⵏ SDOQ",
+    "settings": "ⵉⵙⵏⴼⴰⵍⵏ",
+    "auditLog": "ⴰⴷⴼⵔ ⵏ ⵓⵙⵙⵉⵍⵖ",
+    "verify": "ⵙⵙⵏⵜⵍ",
+    "reject": "ⵔⴼⴹ",
+    "accredit": "ⵙⵏⴼⴰⵍ",
+    "revoke": "ⵙⵔ ⴰⵙⵏⴼⴰⵍ",
+    "status": {
+      "pending": "ⵉⵜⵜⴻⵔⵔⴰ",
+      "active": "ⵉⵙⵍⴽⵏ",
+      "suspended": "ⵉⵜⵜⵓⵢⴻⵔⵙ",
+      "accredited": "ⵉⵜⵜⵓⵙⵏⴼⴰⵍ"
+    }
   }
 }

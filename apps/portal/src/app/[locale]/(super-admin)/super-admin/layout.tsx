@@ -6,7 +6,8 @@ const NAV = [
   { href: '/fr/super-admin/cooperatives', label: 'Coopératives' },
   { href: '/fr/super-admin/labs', label: 'Laboratoires' },
   { href: '/fr/super-admin/specifications', label: 'Spécifications SDOQ' },
-  { href: '/fr/super-admin/settings', label: 'Paramètres & Logs' },
+  { href: '/fr/super-admin/settings', label: 'Paramètres' },
+  { href: '/fr/super-admin/settings/audit-log', label: "Journal d'audit" },
 ];
 
 export default async function SuperAdminLayout({

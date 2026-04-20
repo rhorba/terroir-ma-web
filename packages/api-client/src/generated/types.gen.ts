@@ -597,6 +597,16 @@ export type CooperativeControllerUpdateMemberData = {
 
 export type CooperativeControllerUpdateMemberResponse = unknown;
 
+export type CooperativeStatus = 'pending' | 'active' | 'suspended' | 'revoked';
+
+export type CooperativeControllerFindAllData = {
+    status?: CooperativeStatus;
+    page?: number;
+    limit?: number;
+};
+
+export type CooperativeControllerFindAllResponse = unknown;
+
 export type ProductControllerCreateData = {
     requestBody: CreateProductDto;
 };

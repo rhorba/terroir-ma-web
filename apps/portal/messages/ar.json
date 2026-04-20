@@ -12,5 +12,22 @@
     "unauthorized": "غير مصرح بالوصول",
     "unauthorized_desc": "ليس لديك الصلاحيات اللازمة للوصول إلى هذه الصفحة.",
     "backHome": "العودة إلى الرئيسية"
+  },
+  "superAdmin": {
+    "cooperatives": "التعاونيات",
+    "labs": "المختبرات",
+    "specifications": "مواصفات SDOQ",
+    "settings": "الإعدادات",
+    "auditLog": "سجل المراجعة",
+    "verify": "التحقق",
+    "reject": "الرفض",
+    "accredit": "الاعتماد",
+    "revoke": "سحب الاعتماد",
+    "status": {
+      "pending": "قيد الانتظار",
+      "active": "نشطة",
+      "suspended": "موقوفة",
+      "accredited": "معتمدة"
+    }
   }
 }
