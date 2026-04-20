@@ -1,0 +1,15 @@
+{
+  "verify": {
+    "title": "التحقق من الشهادة",
+    "status_granted": "معتمد",
+    "status_revoked": "ملغى",
+    "status_pending": "قيد المعالجة",
+    "cooperative": "التعاونية",
+    "product_type": "نوع المنتج",
+    "region": "المنطقة",
+    "valid_until": "صالح حتى",
+    "cert_number": "رقم الشهادة",
+    "not_found": "الشهادة غير موجودة",
+    "not_found_desc": "رمز QR هذا غير صالح أو انتهت صلاحيته."
+  }
+}

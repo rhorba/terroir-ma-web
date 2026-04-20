@@ -1,0 +1,16 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "logout": "Déconnexion"
+  },
+  "auth": {
+    "login": "Se connecter",
+    "unauthorized": "Accès non autorisé",
+    "unauthorized_desc": "Vous n'avez pas les droits nécessaires pour accéder à cette page.",
+    "backHome": "Retour à l'accueil"
+  }
+}

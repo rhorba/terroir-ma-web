@@ -1,0 +1,16 @@
+{
+  "common": {
+    "loading": "ⵉⵜⵜⵓⵙⴽⴰⵔ...",
+    "error": "ⵉⵍⵉⵏ ⵓⵛⴽⵉⵡ",
+    "save": "ⵙⴽⵜⵉ",
+    "cancel": "ⵙⵔ",
+    "confirm": "ⵙⵏⵜⵍ",
+    "logout": "ⴼⴼⵖ"
+  },
+  "auth": {
+    "login": "ⴽⵛⵎ",
+    "unauthorized": "ⵓⵔ ⵜⵜⵓⵙⵔⴰ",
+    "unauthorized_desc": "ⵓⵔ ⴷⴰⵔⴽ ⵜⵉⴽⵉⵍⵢⵉⵏ ⵏ ⵓⴽⵛⵎ ⵙ ⵓⵙⵙⴰⵖ ⴰ.",
+    "backHome": "ⵓⵖⴰⵍ ⵖⵔ ⵜⵣⵡⴰⵔⵜ"
+  }
+}

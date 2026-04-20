@@ -1,0 +1,15 @@
+{
+  "verify": {
+    "title": "Vérification de Certification",
+    "status_granted": "Certifié",
+    "status_revoked": "Révoqué",
+    "status_pending": "En cours",
+    "cooperative": "Coopérative",
+    "product_type": "Type de produit",
+    "region": "Région",
+    "valid_until": "Valable jusqu'au",
+    "cert_number": "N° de certification",
+    "not_found": "Certification introuvable",
+    "not_found_desc": "Ce QR code n'est pas valide ou a expiré."
+  }
+}

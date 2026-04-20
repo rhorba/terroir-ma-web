@@ -1,0 +1,15 @@
+{
+  "verify": {
+    "title": "ⵙⵙⵉⵏ ⴰⵎⵙⴰⴷ",
+    "status_granted": "ⵉⵜⵜⵓⵙⵏⵜⵍ",
+    "status_revoked": "ⵉⵜⵜⵓⵙⵔⵔⵓ",
+    "status_pending": "ⵉⵜⵜⵓⵙⴽⴰⵔ",
+    "cooperative": "ⵜⴰⵡⵓⵔⵉ",
+    "product_type": "ⴰⵏⴰⵡ ⵏ ⵓⵙⴽⵔ",
+    "region": "ⵜⴰⵎⵏⴰⴹⵜ",
+    "valid_until": "ⵉⵙⵉⵏ ⴰⵔ",
+    "cert_number": "ⵓⵟⵟⵓⵏ ⵏ ⵓⵎⵙⴰⴷ",
+    "not_found": "ⵓⵔ ⵉⵜⵜⵓⴼⵉ ⵓⵎⵙⴰⴷ",
+    "not_found_desc": "QR ⴰⴷ ⵓⵔ ⵉⵙⵉⵏ."
+  }
+}
