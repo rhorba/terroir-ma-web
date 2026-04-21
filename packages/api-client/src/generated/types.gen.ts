@@ -2202,3 +2202,7 @@ export type $OpenApiTs = {
         };
     };
 };
+
+export type paths = $OpenApiTs;
+export type components = Record<string, never>;
+export type operations = Record<string, never>;
