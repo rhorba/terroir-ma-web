@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 const NAV = [
+  { href: '/fr/cooperative-member', label: 'Mon espace' },
   { href: '/fr/cooperative-member/harvests', label: 'Mes Récoltes' },
   { href: '/fr/cooperative-member/batches', label: 'Mes Lots' },
 ];
