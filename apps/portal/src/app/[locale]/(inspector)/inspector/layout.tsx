@@ -3,8 +3,8 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 const NAV = [
+  { href: '/fr/inspector', label: 'Tableau de bord' },
   { href: '/fr/inspector/inspections', label: 'Mes Inspections' },
-  { href: '/fr/inspector/farms', label: 'Fermes' },
 ];
 
 export default async function InspectorLayout({
