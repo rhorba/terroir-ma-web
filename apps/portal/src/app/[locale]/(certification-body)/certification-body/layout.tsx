@@ -3,9 +3,8 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 const NAV = [
+  { href: '/fr/certification-body', label: 'Tableau de bord' },
   { href: '/fr/certification-body/certifications', label: 'Certifications' },
-  { href: '/fr/certification-body/qrcodes', label: 'QR Codes' },
-  { href: '/fr/certification-body/export-documents', label: "Documents d'export" },
 ];
 
 export default async function CertificationBodyLayout({
