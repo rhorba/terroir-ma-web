@@ -3,8 +3,9 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 const NAV = [
+  { href: '/fr/lab-technician', label: 'Tableau de bord' },
   { href: '/fr/lab-technician/queue', label: "File d'attente" },
-  { href: '/fr/lab-technician/submit', label: 'Soumettre résultats' },
+  { href: '/fr/lab-technician/submit', label: 'Soumettre un test' },
 ];
 
 export default async function LabTechnicianLayout({
