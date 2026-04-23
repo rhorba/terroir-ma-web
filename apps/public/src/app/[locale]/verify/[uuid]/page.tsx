@@ -1,33 +1,22 @@
 import { getTranslations } from 'next-intl/server';
+import { fetchVerification, type CertificationStatus } from '@/lib/api-public';
 
 interface VerifyPageProps {
   params: { uuid: string; locale: string };
 }
 
-interface CertificationVerification {
-  certificationNumber?: string;
-  cooperativeName?: string;
-  productType?: string;
-  region?: string;
-}
-
-async function fetchCertification(uuid: string): Promise<CertificationVerification | null> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
-  try {
-    const res = await fetch(`${apiUrl}/verify/${uuid}`, { cache: 'no-store' });
-    if (!res.ok) return null;
-    const body = await res.json();
-    return (body?.data as CertificationVerification) ?? null;
-  } catch {
-    return null;
-  }
+function statusColor(status: CertificationStatus): string {
+  if (status === 'GRANTED' || status === 'RENEWED') return 'bg-green-100 text-green-800';
+  if (status === 'REVOKED' || status === 'DENIED') return 'bg-red-100 text-red-800';
+  return 'bg-amber-100 text-amber-800';
 }
 
 export default async function VerifyPage({ params }: VerifyPageProps) {
   const t = await getTranslations('verify');
-  const cert = await fetchCertification(params.uuid);
+  const data = await fetchVerification(params.uuid, params.locale);
+  const cert = data?.certification ?? null;
 
-  if (!cert) {
+  if (!data || !cert) {
     return (
       <main className="flex min-h-screen items-center justify-center p-8">
         <div className="max-w-md rounded-lg border border-red-200 bg-red-50 p-6 text-center">
@@ -40,26 +29,55 @@ export default async function VerifyPage({ params }: VerifyPageProps) {
 
   return (
     <main className="flex min-h-screen items-center justify-center p-8">
-      <div className="max-w-md rounded-lg border border-green-200 bg-green-50 p-6">
+      <div className="max-w-md rounded-lg border border-green-200 bg-white p-6 shadow-sm">
         <h1 className="text-xl font-bold text-green-800">{t('title')}</h1>
-        <dl className="mt-4 space-y-2 text-sm">
+
+        {data.statusDisplay && (
+          <span
+            className={`mt-3 inline-block rounded-full px-3 py-1 text-xs font-semibold ${statusColor(cert.currentStatus)}`}
+          >
+            {data.statusDisplay}
+          </span>
+        )}
+
+        <dl className="mt-4 space-y-3 text-sm">
           <div>
-            <dt className="font-medium text-gray-600">{t('cert_number')}</dt>
-            <dd className="text-gray-900">{cert.certificationNumber ?? '—'}</dd>
+            <dt className="font-medium text-gray-500">{t('cert_number')}</dt>
+            <dd className="mt-0.5 font-mono text-gray-900">{cert.certificationNumber ?? '—'}</dd>
           </div>
           <div>
-            <dt className="font-medium text-gray-600">{t('cooperative')}</dt>
-            <dd className="text-gray-900">{cert.cooperativeName ?? '—'}</dd>
+            <dt className="font-medium text-gray-500">{t('cooperative')}</dt>
+            <dd className="mt-0.5 text-gray-900">{cert.cooperativeName}</dd>
           </div>
           <div>
-            <dt className="font-medium text-gray-600">{t('product_type')}</dt>
-            <dd className="text-gray-900">{cert.productType ?? '—'}</dd>
+            <dt className="font-medium text-gray-500">{t('product_type')}</dt>
+            <dd className="mt-0.5 text-gray-900">{cert.productTypeCode}</dd>
           </div>
           <div>
-            <dt className="font-medium text-gray-600">{t('region')}</dt>
-            <dd className="text-gray-900">{cert.region ?? '—'}</dd>
+            <dt className="font-medium text-gray-500">{t('cert_type')}</dt>
+            <dd className="mt-0.5 text-gray-900">{cert.certificationType}</dd>
           </div>
+          <div>
+            <dt className="font-medium text-gray-500">{t('region')}</dt>
+            <dd className="mt-0.5 text-gray-900">{cert.regionCode}</dd>
+          </div>
+          {cert.validFrom && (
+            <div>
+              <dt className="font-medium text-gray-500">{t('valid_from')}</dt>
+              <dd className="mt-0.5 text-gray-900">{cert.validFrom}</dd>
+            </div>
+          )}
+          {cert.validUntil && (
+            <div>
+              <dt className="font-medium text-gray-500">{t('valid_until')}</dt>
+              <dd className="mt-0.5 text-gray-900">{cert.validUntil}</dd>
+            </div>
+          )}
         </dl>
+
+        {data.message && (
+          <p className="mt-4 text-xs text-gray-400">{data.message}</p>
+        )}
       </div>
     </main>
   );

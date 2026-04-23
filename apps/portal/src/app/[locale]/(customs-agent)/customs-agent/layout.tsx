@@ -2,17 +2,19 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
-const NAV = [
-  { href: '/fr/customs-agent/export-documents', label: "Documents d'export" },
-];
-
 export default async function CustomsAgentLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   const session = await auth();
-  if (!session) redirect('/fr/login');
+  if (!session) redirect(`/${locale}/login`);
+
+  const NAV = [
+    { href: `/${locale}/customs-agent/export-documents`, label: "Documents d'export" },
+  ];
 
   return (
     <div className="flex min-h-screen">

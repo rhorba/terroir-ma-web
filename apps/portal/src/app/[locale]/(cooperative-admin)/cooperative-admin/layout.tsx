@@ -2,21 +2,23 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
-const NAV = [
-  { href: '/fr/cooperative-admin', label: 'Tableau de bord' },
-  { href: '/fr/cooperative-admin/members', label: 'Membres' },
-  { href: '/fr/cooperative-admin/farms', label: 'Fermes' },
-  { href: '/fr/cooperative-admin/products', label: 'Produits' },
-  { href: '/fr/cooperative-admin/batches', label: 'Lots de production' },
-];
-
 export default async function CooperativeAdminLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   const session = await auth();
-  if (!session) redirect('/fr/login');
+  if (!session) redirect(`/${locale}/login`);
+
+  const NAV = [
+    { href: `/${locale}/cooperative-admin`, label: 'Tableau de bord' },
+    { href: `/${locale}/cooperative-admin/members`, label: 'Membres' },
+    { href: `/${locale}/cooperative-admin/farms`, label: 'Fermes' },
+    { href: `/${locale}/cooperative-admin/products`, label: 'Produits' },
+    { href: `/${locale}/cooperative-admin/batches`, label: 'Lots de production' },
+  ];
 
   return (
     <div className="flex min-h-screen">

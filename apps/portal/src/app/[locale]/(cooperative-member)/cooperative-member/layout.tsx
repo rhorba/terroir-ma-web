@@ -2,19 +2,21 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
-const NAV = [
-  { href: '/fr/cooperative-member', label: 'Mon espace' },
-  { href: '/fr/cooperative-member/harvests', label: 'Mes Récoltes' },
-  { href: '/fr/cooperative-member/batches', label: 'Mes Lots' },
-];
-
 export default async function CooperativeMemberLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   const session = await auth();
-  if (!session) redirect('/fr/login');
+  if (!session) redirect(`/${locale}/login`);
+
+  const NAV = [
+    { href: `/${locale}/cooperative-member`, label: 'Mon espace' },
+    { href: `/${locale}/cooperative-member/harvests`, label: 'Mes Récoltes' },
+    { href: `/${locale}/cooperative-member/batches`, label: 'Mes Lots' },
+  ];
 
   return (
     <div className="flex min-h-screen">

@@ -2,18 +2,20 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
-const NAV = [
-  { href: '/fr/inspector', label: 'Tableau de bord' },
-  { href: '/fr/inspector/inspections', label: 'Mes Inspections' },
-];
-
 export default async function InspectorLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   const session = await auth();
-  if (!session) redirect('/fr/login');
+  if (!session) redirect(`/${locale}/login`);
+
+  const NAV = [
+    { href: `/${locale}/inspector`, label: 'Tableau de bord' },
+    { href: `/${locale}/inspector/inspections`, label: 'Mes Inspections' },
+  ];
 
   return (
     <div className="flex min-h-screen">

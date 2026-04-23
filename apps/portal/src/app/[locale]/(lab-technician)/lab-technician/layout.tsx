@@ -2,19 +2,21 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
-const NAV = [
-  { href: '/fr/lab-technician', label: 'Tableau de bord' },
-  { href: '/fr/lab-technician/queue', label: "File d'attente" },
-  { href: '/fr/lab-technician/submit', label: 'Soumettre un test' },
-];
-
 export default async function LabTechnicianLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   const session = await auth();
-  if (!session) redirect('/fr/login');
+  if (!session) redirect(`/${locale}/login`);
+
+  const NAV = [
+    { href: `/${locale}/lab-technician`, label: 'Tableau de bord' },
+    { href: `/${locale}/lab-technician/queue`, label: "File d'attente" },
+    { href: `/${locale}/lab-technician/submit`, label: 'Soumettre un test' },
+  ];
 
   return (
     <div className="flex min-h-screen">

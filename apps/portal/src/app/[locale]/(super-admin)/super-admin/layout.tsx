@@ -2,21 +2,23 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
-const NAV = [
-  { href: '/fr/super-admin/cooperatives', label: 'Coopératives' },
-  { href: '/fr/super-admin/labs', label: 'Laboratoires' },
-  { href: '/fr/super-admin/specifications', label: 'Spécifications SDOQ' },
-  { href: '/fr/super-admin/settings', label: 'Paramètres' },
-  { href: '/fr/super-admin/settings/audit-log', label: "Journal d'audit" },
-];
-
 export default async function SuperAdminLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   const session = await auth();
-  if (!session) redirect('/fr/login');
+  if (!session) redirect(`/${locale}/login`);
+
+  const NAV = [
+    { href: `/${locale}/super-admin/cooperatives`, label: 'Coopératives' },
+    { href: `/${locale}/super-admin/labs`, label: 'Laboratoires' },
+    { href: `/${locale}/super-admin/specifications`, label: 'Spécifications SDOQ' },
+    { href: `/${locale}/super-admin/settings`, label: 'Paramètres' },
+    { href: `/${locale}/super-admin/settings/audit-log`, label: "Journal d'audit" },
+  ];
 
   return (
     <div className="flex min-h-screen">
