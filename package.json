@@ -7,9 +7,11 @@
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
     "lint": "pnpm -r lint",
-    "generate-api": "bash scripts/generate-api.sh"
+    "generate-api": "bash scripts/generate-api.sh",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "typescript": "^5.4.0"
   },
   "engines": {
