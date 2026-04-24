@@ -1,26 +1,37 @@
-FROM node:20-alpine AS deps
+# Build context: repo root (terroir-ma-web/)
+FROM node:20-alpine AS base
 RUN corepack enable
-WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
+
+FROM base AS deps
+WORKDIR /repo
+# Copy workspace manifests for layer-cache isolation
+COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
+COPY apps/portal/package.json apps/portal/
+COPY apps/public/package.json apps/public/
+COPY packages/api-client/package.json packages/api-client/
 RUN pnpm install --frozen-lockfile
 
-FROM node:20-alpine AS builder
-RUN corepack enable
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+FROM base AS builder
+WORKDIR /repo
+# Copy root + per-app node_modules from deps stage (preserves pnpm symlinks)
+COPY --from=deps /repo/node_modules ./node_modules
+COPY --from=deps /repo/apps/public/node_modules ./apps/public/node_modules
+# Copy all workspace source files
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_OUTPUT=standalone
+WORKDIR /repo/apps/public
 RUN pnpm build
 
-FROM node:20-alpine AS runner
+FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /repo/apps/public/.next/standalone ./
+COPY --from=builder /repo/apps/public/.next/static ./.next/static
+COPY --from=builder /repo/apps/public/public ./public
 USER nextjs
-EXPOSE 3000
-ENV PORT=3000
+EXPOSE 3002
+ENV PORT=3002
 CMD ["node", "server.js"]
