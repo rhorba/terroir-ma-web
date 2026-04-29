@@ -17,8 +17,7 @@ export default async function LabDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const res = await apiFetch<{ success: boolean; data: Lab }>(`/api/v1/labs/${id}`);
-  const lab = res.data;
+  const lab = await apiFetch<Lab>(`/api/v1/labs/${id}`);
 
   return (
     <div className="max-w-xl">

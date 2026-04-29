@@ -27,10 +27,7 @@ export default async function CooperativeDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const coop = await apiFetch<{ success: boolean; data: Cooperative }>(
-    `/api/v1/cooperatives/${id}`,
-  );
-  const c = coop.data;
+  const c = await apiFetch<Cooperative>(`/api/v1/cooperatives/${id}`);
 
   const fields: [string, string | null | undefined][] = [
     ['ICE', c.ice],

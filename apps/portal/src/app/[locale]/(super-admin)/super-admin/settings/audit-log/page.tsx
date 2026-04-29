@@ -30,11 +30,9 @@ export default async function AuditLogPage({
   if (params.from) query.set('from', params.from);
   if (params.to) query.set('to', params.to);
 
-  const result = await apiFetch<{ success: boolean; data: PagedAudit }>(
-    `/api/v1/admin/audit-logs?${query}`,
-  );
-  const logs = result.data?.data ?? [];
-  const total = result.data?.total ?? 0;
+  const result = await apiFetch<PagedAudit>(`/api/v1/admin/audit-logs?${query}`);
+  const logs = result?.data ?? [];
+  const total = result?.total ?? 0;
 
   return (
     <div>

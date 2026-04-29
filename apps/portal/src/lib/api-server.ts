@@ -20,5 +20,6 @@ export async function apiFetch<T>(
     const text = await res.text().catch(() => res.statusText);
     throw new Error(`API ${res.status}: ${text}`);
   }
-  return res.json() as Promise<T>;
+  const envelope = (await res.json()) as { success: boolean; data: T; error: unknown; meta: unknown };
+  return envelope.data;
 }

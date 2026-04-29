@@ -10,10 +10,7 @@ type Dashboard = {
 export default async function SuperAdminHome() {
   let dash: Dashboard | null = null;
   try {
-    const res = await apiFetch<{ success: boolean; data: Dashboard }>(
-      '/api/v1/admin/dashboard',
-    );
-    dash = res.data;
+    dash = await apiFetch<Dashboard>('/api/v1/admin/dashboard');
   } catch {
     // backend offline — degrade gracefully
   }

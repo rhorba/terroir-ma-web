@@ -13,8 +13,7 @@ type Lab = {
 };
 
 export default async function LabsPage() {
-  const result = await apiFetch<{ success: boolean; data: Lab[] }>('/api/v1/labs');
-  const labs = result.data ?? [];
+  const labs = (await apiFetch<Lab[]>('/api/v1/labs')) ?? [];
 
   return (
     <div>

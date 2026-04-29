@@ -27,10 +27,7 @@ export default async function SpecDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const res = await apiFetch<{ success: boolean; data: ProductType }>(
-    `/api/v1/product-types/${id}`,
-  );
-  const s = res.data;
+  const s = await apiFetch<ProductType>(`/api/v1/product-types/${id}`);
 
   const updateAction = updateProductType.bind(null, s.id);
 

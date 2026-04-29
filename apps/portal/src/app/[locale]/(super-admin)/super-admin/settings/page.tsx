@@ -30,15 +30,9 @@ const sectionCls = 'rounded-lg border border-gray-200 bg-white p-5 shadow-sm';
 
 export default async function SettingsPage() {
   const [campaign, cert, platform] = await Promise.all([
-    apiFetch<{ success: boolean; data: CampaignSettings }>(
-      '/api/v1/admin/settings/campaign',
-    ),
-    apiFetch<{ success: boolean; data: CertSettings }>(
-      '/api/v1/admin/settings/certification',
-    ),
-    apiFetch<{ success: boolean; data: PlatformSettings }>(
-      '/api/v1/admin/settings/platform',
-    ),
+    apiFetch<CampaignSettings>('/api/v1/admin/settings/campaign'),
+    apiFetch<CertSettings>('/api/v1/admin/settings/certification'),
+    apiFetch<PlatformSettings>('/api/v1/admin/settings/platform'),
   ]);
 
   return (
@@ -55,7 +49,7 @@ export default async function SettingsPage() {
             </label>
             <input
               name="currentCampaignYear"
-              defaultValue={campaign.data.currentCampaignYear}
+              defaultValue={campaign.currentCampaignYear}
               className={inputCls}
             />
           </div>
@@ -67,7 +61,7 @@ export default async function SettingsPage() {
                 name="campaignStartMonth"
                 min={1}
                 max={12}
-                defaultValue={campaign.data.campaignStartMonth}
+                defaultValue={campaign.campaignStartMonth}
                 className={inputCls}
               />
             </div>
@@ -78,7 +72,7 @@ export default async function SettingsPage() {
                 name="campaignEndMonth"
                 min={1}
                 max={12}
-                defaultValue={campaign.data.campaignEndMonth}
+                defaultValue={campaign.campaignEndMonth}
                 className={inputCls}
               />
             </div>
@@ -101,7 +95,7 @@ export default async function SettingsPage() {
               <input
                 type="number"
                 name="defaultValidityDays"
-                defaultValue={cert.data.defaultValidityDays}
+                defaultValue={cert.defaultValidityDays}
                 className={inputCls}
               />
             </div>
@@ -112,7 +106,7 @@ export default async function SettingsPage() {
               <input
                 type="number"
                 name="maxRenewalGraceDays"
-                defaultValue={cert.data.maxRenewalGraceDays}
+                defaultValue={cert.maxRenewalGraceDays}
                 className={inputCls}
               />
             </div>
@@ -132,7 +126,7 @@ export default async function SettingsPage() {
             <input
               type="email"
               name="supportEmail"
-              defaultValue={platform.data.supportEmail}
+              defaultValue={platform.supportEmail}
               className={inputCls}
             />
           </div>
@@ -143,7 +137,7 @@ export default async function SettingsPage() {
               name="maintenanceMode"
               value="true"
               id="maintenance"
-              defaultChecked={platform.data.maintenanceMode}
+              defaultChecked={platform.maintenanceMode}
               className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
             />
             <label htmlFor="maintenance" className="text-sm font-medium text-gray-700">
