@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Terroir.ma — Portal (Next.js)
 
-## Getting Started
+The `@terroir/portal` Next.js 14 application serving all 9 Keycloak roles. Built with App Router, next-auth v5, next-intl (fr/ar/zgh), and TailwindCSS.
 
-First, run the development server:
+## Architecture
+
+- **Next.js 14 App Router** — server components + server actions
+- **next-auth v5 (Keycloak)** — JWT with `realm_access.roles` decoded client-side
+- **next-intl** — trilingual support (French, Arabic, Amazigh/Tifinagh)
+- **@terroir/api-client** — generated OpenAPI fetch client
+- **TailwindCSS + shadcn/ui** — design system
+
+## Role-based routing
+
+| Path prefix | Keycloak role required |
+|---|---|
+| `/super-admin` | `super-admin` |
+| `/cooperative-admin` | `cooperative-admin` |
+| `/cooperative-member` | `cooperative-member` |
+| `/lab-technician` | `lab-technician` |
+| `/inspector` | `inspector` |
+| `/certification-body` | `certification-body` |
+| `/customs-agent` | `customs-agent` |
+
+Unauthorized access redirects to `/fr/unauthorized`.
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm dev          # starts on :3001
+pnpm typecheck    # TypeScript strict check
+pnpm lint         # ESLint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Testing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Unit tests use **Vitest + React Testing Library** with `jsdom` environment.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+pnpm test             # run all unit tests (once)
+pnpm test:watch       # watch mode
+pnpm test:coverage    # run with V8 coverage report
+```
 
-## Learn More
+### Coverage (2026-04-30)
 
-To learn more about Next.js, take a look at the following resources:
+| Metric | Result | Threshold |
+|---|---|---|
+| Statements | **100%** (149/149) | 80% |
+| Branches | **100%** (70/70) | 70% |
+| Functions | **100%** (42/42) | 80% |
+| Lines | **100%** (143/143) | 80% |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**240 tests** across **24 test files** covering:
+- `src/lib/` — `cn`, `apiFetch`, `getAccessToken`, `getRoles`, `getCooperativeId`
+- `src/components/admin/` — `StatusBadge`, `DataTable`, `PageHeader`, `ActionButton`, `ConfirmModal`
+- `src/components/ui/` — `Button` (all 6 variants × 4 sizes)
+- `src/components/providers` — `Providers` wrapper
+- `src/navigation.ts` — locale constants
+- `src/app/**/actions.ts` — all 12 server action modules (harvest, batch, farm, members, cooperative, labs, settings, specifications, certification, inspection, export-document, lab-queue)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Test structure
 
-## Deploy on Vercel
+```
+src/__tests__/
+  setup.ts                  # @testing-library/jest-dom bootstrap
+  lib/
+    utils.test.ts
+    auth-utils.test.ts
+    api-server.test.ts
+  components/
+    status-badge.test.tsx
+    data-table.test.tsx
+    page-header.test.tsx
+    action-button.test.tsx
+    confirm-modal.test.tsx
+    providers.test.tsx
+    ui/button.test.tsx
+  navigation.test.ts
+  actions/
+    harvest.test.ts
+    batch.test.ts
+    cooperative.test.ts
+    certification.test.ts
+    farm.test.ts
+    members.test.ts
+    inspection.test.ts
+    export-document.test.ts
+    lab-submit.test.ts
+    lab-queue.test.ts
+    labs.test.ts
+    settings.test.ts
+    specifications.test.ts
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Mock strategy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+| Layer | Mocked | Reason |
+|---|---|---|
+| Server actions | `@/lib/api-server` (apiFetch), `next/cache` (revalidatePath) | Isolate network and cache calls |
+| `auth-utils.ts` | `@/auth` (auth) | Avoid NextAuth runtime |
+| `api-server.ts` | `@/lib/auth-utils`, `global.fetch` | Full fetch isolation |
+| ActionButton | `react-dom` (useFormStatus) | Control pending state |
+| Providers | `next-auth/react`, `@tanstack/react-query` | Avoid real QueryClient |
+| navigation.ts | `next-intl/navigation` | Avoid intl runtime |
+
+## E2E Tests (Playwright)
+
+105 tests across 10 spec files (auth, roles, certification chain, QR, export docs).
+
+```bash
+# From workspace root:
+pnpm test:e2e
+```
+
+## Environment variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `KEYCLOAK_CLIENT_ID` | Yes | Keycloak client ID |
+| `KEYCLOAK_CLIENT_SECRET` | Yes | Keycloak client secret |
+| `KEYCLOAK_ISSUER` | Yes | Keycloak issuer URL |
+| `NEXT_PUBLIC_API_URL` | No | Backend API base URL (default: `http://localhost:3000`) |
+| `NEXTAUTH_URL` | Yes (prod) | Public URL for NextAuth callbacks |
+| `NEXTAUTH_SECRET` | Yes | NextAuth session signing secret |
